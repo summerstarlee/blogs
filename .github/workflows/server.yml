@@ -4,7 +4,7 @@ name: blog deploy shell
 on:
   push:
     branches: 
-      - main
+      - master
 
 jobs:
   setup-build-publish-deploy:
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         persist-credentials: false
 
@@ -21,9 +21,11 @@ jobs:
         yarn 
         yarn build
     
-    - name: Deploy to Server 🚀
-      uses: JamesIves/github-pages-deploy-action@v4
+    # 3. 将打包后的代码部署到 gh-pages 分支
+    - name: Deploy 🚀
+      uses: JamesIves/github-pages-deploy-action@4
       with:
+        # 为了让 GitHub触发重新构建页面，您必须使用存储库提供的GitHub令牌来提供操作, GITHUB_TOKEN 是系统默认提供的  不需要单独配置环境变量
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages 
-        FOLDER: dist
+        FOLDER: dist 
