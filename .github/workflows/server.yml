@@ -1,0 +1,29 @@
+# 部署到 http://blog.leesummer.cn/ 域名
+name: blog deploy shell
+
+on:
+  push:
+    branches: 
+      - main
+
+jobs:
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish, and Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+
+    - name: Install and build 🔧
+      run: |
+        yarn 
+        yarn build
+    
+    - name: Deploy to Server 🚀
+      uses: easingthemes/ssh-deploy@v2.1.5
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages 
+        FOLDER: dist
