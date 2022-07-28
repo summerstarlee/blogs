@@ -4,7 +4,7 @@ const {defaultTheme} = require("@vuepress/theme-default")
 module.exports = {
     base: "/blogs/",
     title: "",
-    description: "Welcome Star Lee's blog !",
+    description: "Just code",
     dest: 'dist',
     head: [
         ['link', { rel: 'icon', href: '/android-icon-36x36.png' }]
@@ -24,6 +24,15 @@ module.exports = {
           text: '前端工程化',
           link: '/engineering/',
         },
+        {
+          text: "读书笔记",
+          children: [
+            {
+              text: "前端架构与工程",
+              link: "/frontFrameworkEngineering/"
+            }
+          ]
+        }
       ], 
       sidebar: {
         '/engineering/': [
@@ -37,6 +46,9 @@ module.exports = {
           'standard-version',
           'monitor_system'
         ],
+        '/frontFrameworkEngineering/': [
+          "",
+        ]
       }
     })
 
